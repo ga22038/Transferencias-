@@ -1,0 +1,150 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Alertas de Transferencias</title>
+    <link rel="stylesheet" href="styles2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <!-- Contenedor principal -->
+<div class="container">
+    <!-- Barra lateral -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Dashboard</h2>
+        </div>
+        
+        <div class="upload-section">
+            <h3>Cargar Archivo</h3>
+            <input type="file" id="fileInput" class="file-input" accept=".xlsx,.xls">
+            <button onclick="processFile()" class="btn">Procesar Archivo</button>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Monitoreo de Transferencias</h1>
+            <p id="lastUpdate"></p>
+        </div>
+
+        <!-- Sección de métricas -->
+        <div class="cards-grid">
+            <div class="metric-card">
+                <h3>Total Transferencias</h3>
+                <p id="totalTransfers">0</p>
+            </div>
+            
+            <div class="metric-card">
+                <h3>Clientes Únicos</h3>
+                <p id="uniqueClients">0</p>
+            </div>
+            
+            <div class="metric-card">
+                <h3>Monto Total</h3>
+                <p id="totalAmount">$0</p>
+            </div>
+            
+            <div class="metric-card">
+                <h3>Alertas Activas</h3>
+                <p id="activeAlerts">0</p>
+            </div>
+        </div>
+
+        <!-- Sección de alertas -->
+        <div class="alerts-container">
+            <h2>Alertas de Transferencias</h2>
+            <div id="alerts" class="alerts-grid">
+                <!-- Las alertas se insertarán aquí dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Sección de la tabla con filtros -->
+        <div class="table-container">
+            <h2>Resumen de Transacciones</h2>
+            
+            <!-- Nueva sección de filtros -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <div class="filter-label">Cliente</div>
+                    <input type="text" id="clientFilter" class="filter-input" placeholder="Ingrese el nombre del cliente" />
+                </div>
+                <div class="filter-group">
+                    <div class="filter-label">Mes</div>
+                    <select id="monthFilter" class="filter-select">
+                        <option value="">Seleccione un mes</option>
+                        <option value="enero">Enero</option>
+                        <option value="febrero">Febrero</option>
+                        <option value="marzo">Marzo</option>
+                        <option value="abril">Abril</option>
+                        <option value="mayo">Mayo</option>
+                        <option value="junio">Junio</option>
+                        <option value="julio">Julio</option>
+                        <option value="agosto">Agosto</option>
+                        <option value="septiembre">Septiembre</option>
+                        <option value="octubre">Octubre</option>
+                        <option value="noviembre">Noviembre</option>
+                        <option value="diciembre">Diciembre</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-label">Monto Total Mínimo</div>
+                    <input type="number" id="minAmountFilter" class="filter-input" placeholder="Ingrese el monto mínimo" />
+                </div>
+                <div class="filter-group">
+                    <div class="filter-label">Monto Total Máximo</div>
+                    <input type="number" id="maxAmountFilter" class="filter-input" placeholder="Ingrese el monto máximo" />
+                </div>
+                <div class="filter-group">
+                    <div class="filter-label">Estado</div>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">Seleccione un estado</option>
+                        <option value="excede">Excede límite</option>
+                        <option value="normal">Normal</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button id="clearFilters" class="btn-clear">Limpiar Filtros</button>
+                </div>
+            </div>
+            
+
+            <!-- Tabla responsiva -->
+            <div class="table-responsive">
+                <table id="transactionsTable">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Mes</th>
+                            <th>Transferencias</th>
+                            <th>Monto Total</th>
+                            <th>Estado</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los datos de la tabla se insertarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para detalles -->
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Detalles de Transferencias</h2>
+        <div id="modalContent">
+            <!-- El contenido del modal se insertará aquí dinámicamente -->
+        </div>
+    </div>
+</div>
+
+    <script src="script2.js"></script>
+</body>
+</html>
